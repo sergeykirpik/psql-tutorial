@@ -1,0 +1,1 @@
+REINDEX (VERBOSE) DATABASE dvdrental;
