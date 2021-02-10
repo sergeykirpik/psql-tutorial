@@ -1,0 +1,42 @@
+-- DROP ROLE IF EXISTS joe;
+
+-- CREATE ROLE joe
+-- WITH
+-- 	LOGIN
+-- 	PASSWORD 'Abcd1234';
+	
+DROP TABLE IF EXISTS candidates;
+
+CREATE TABLE candidates (
+	candidate_id INT GENERATED ALWAYS AS IDENTITY,
+	first_name VARCHAR(100) NOT NULL,
+	last_name VARCHAR(100) NOT NULL,
+	email VARCHAR(255) NOT NULL UNIQUE,
+	phone VARCHAR(25) NOT NULL,
+	PRIMARY KEY (candidate_id)
+);
+
+GRANT SELECT
+ON candidates
+TO joe;
+
+GRANT INSERT, UPDATE, DELETE
+ON candidates
+TO joe;
+
+GRANT ALL
+ON candidates
+TO joe;
+
+GRANT ALL
+ON ALL TABLES
+IN SCHEMA "public"
+TO joe;
+
+GRANT SELECT
+ON ALL TABLES
+IN SCHEMA "public"
+TO joe;
+
+
+
