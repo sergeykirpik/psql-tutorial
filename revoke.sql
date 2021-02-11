@@ -1,0 +1,22 @@
+REVOKE ALL
+ON film
+FROM jim;
+
+REVOKE SELECT
+ON actor
+FROM jim;
+
+DROP ROLE IF EXISTS jim;
+
+CREATE ROLE jim
+WITH
+	LOGIN
+	PASSWORD 'securePass1';
+	
+GRANT ALL
+ON film
+TO jim;
+
+GRANT SELECT
+ON actor
+TO jim;
