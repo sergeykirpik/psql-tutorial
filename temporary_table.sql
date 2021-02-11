@@ -1,0 +1,20 @@
+CREATE TEMP TABLE IF NOT EXISTS mytemp (c INT);
+
+SELECT * FROM mytemp;
+
+DROP TABLE IF EXISTS customers CASCADE;
+
+CREATE TABLE IF NOT EXISTS customers (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR NOT NULL
+);
+
+CREATE TEMP TABLE IF NOT EXISTS customers (
+	customer_id INT
+);
+
+SELECT * FROM customers;
+
+DROP TABLE customers;
+
+SELECT * FROM customers;

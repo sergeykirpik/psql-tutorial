@@ -1,0 +1,54 @@
+--TIME 						 8 bytes 00:00:00      to 24:00:00
+--TIME with time zone 		12 bytes 00:00:00+1459 to 24:00:00-1459
+--HH:MM; HH:MM:SS; HHMMSS
+--MM:SS.pppppp
+
+SELECT '01:02'::time;
+
+SELECT '01:02:03'::time;
+
+SELECT '010203'::time;
+
+SELECT '04:59.999999'::time;
+
+DROP TABLE IF EXISTS shifts;
+CREATE TABLE shifts (
+	id SERIAL PRIMARY KEY,
+	shift_name VARCHAR NOT NULL,
+	start_at TIME NOT NULL,
+	end_at TIME NOT NULL
+);
+
+INSERT INTO shifts(shift_name, start_at, end_at)
+VALUES
+	('Morning', '08:00:00', '12:00:00'),
+	('Afternoon', '13:00:00', '17:00:00'),
+	('Night', '18:00:00', '22:00:00')
+RETURNING *;
+
+SELECT '04:05:06 PST'::time with time zone;
+
+SELECT '04:05:06.789-8'::time with time zone;
+
+SELECT CURRENT_TIME;
+
+SELECT CURRENT_TIME(5);
+
+SELECT LOCALTIME;
+
+SELECT LOCALTIME(1);
+
+SELECT LOCALTIME(0);
+
+SELECT LOCALTIME AT TIME ZONE 'UTC-7';
+
+SELECT
+	LOCALTIME,
+	EXTRACT (HOUR FROM LOCALTIME) AS hour,
+	EXTRACT (MINUTE FROM LOCALTIME) AS minute,
+	EXTRACT (SECOND FROM LOCALTIME) AS second,
+	EXTRACT (MILLISECONDS FROM LOCALTIME) AS milliseconds;
+	
+SELECT TIME '10:00' - TIME '02:00' AS result;
+
+SELECT LOCALTIME + INTERVAL '2 hours' AS result;
